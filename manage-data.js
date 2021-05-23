@@ -9,7 +9,7 @@ function consoleRequest(request,object=null) {
                 if(object !== null) object.html(html);
             }
     });
-};
+}
 
 function dbDataRequest(request,success) {
     //ajax request 
@@ -22,7 +22,7 @@ function dbDataRequest(request,success) {
                 success(html);
             }
     });
-};
+}
 
 $(document).ready(function(e) {
     //открыть/закрыть блок с общей информацией
