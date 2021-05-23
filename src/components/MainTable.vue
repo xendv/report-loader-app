@@ -1,7 +1,7 @@
 <template>
   <v-data-table
     :headers="headers"
-    :items="desserts"
+    :items="main_info"
     :items-per-page="5"
     item-key="name"
     class="elevation-1"
@@ -20,11 +20,29 @@
       return {
         headers: [
           {
-            text: 'Dessert (100g serving)',
+            text: 'id',
             align: 'start',
-            value: 'name',
+            value: 'id',
           },
-          { text: 'Category', value: 'category' },
+          { text: 'ОКПО', value: 'okpo' },
+          { text: 'Название предприятия', value: 'name' },
+        ],
+        main_info: [
+          {
+            id: '1',
+            okpo: '12134335',
+            name: '"Квадратные штаны"',
+          },
+          {
+            id: '2',
+            okpo: '57692312',
+            name: '"Ломай-убирай"',
+          },
+          {
+            id: '3',
+            okpo: '24547869',
+            name: '"Всё в шоколаде"',
+          },
         ],
         desserts: [
           {
@@ -34,34 +52,6 @@
           {
             name: 'Ice cream sandwich',
             category: 'Ice cream',
-          },
-          {
-            name: 'Eclair',
-            category: 'Cookie',
-          },
-          {
-            name: 'Cupcake',
-            category: 'Pastry',
-          },
-          {
-            name: 'Gingerbread',
-            category: 'Cookie',
-          },
-          {
-            name: 'Jelly bean',
-            category: 'Candy',
-          },
-          {
-            name: 'Lollipop',
-            category: 'Candy',
-          },
-          {
-            name: 'Honeycomb',
-            category: 'Toffee',
-          },
-          {
-            name: 'Donut',
-            category: 'Pastry',
           },
           {
             name: 'KitKat',
