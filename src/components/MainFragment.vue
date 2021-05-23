@@ -1,38 +1,69 @@
 <template>
-  <v-container>
+  <v-container >
     <v-row class="text-center">
       <v-col cols="12">
-        <v-img
+        <!--<v-img
           :src="require('../assets/logo.svg')"
           class="my-3"
           contain
           height="200"
-        />
+        />-->
       </v-col>
 
       <v-col class="mb-4">
         <h1 class="display-2 font-weight-bold mb-3">
-          Welcome to Vuetify
+          Добро пожаловать в Report Loader
         </h1>
-
-        <p class="subheading font-weight-regular">
-          For help and collaboration with other Vuetify developers,
-          <br>please join our online
-          <a
-            href="https://community.vuetifyjs.com"
-            target="_blank"
-          >Discord Community</a>
-        </p>
       </v-col>
+
+       <v-col
+        class="mb-5"
+        cols="12"
+      >
+        <v-row justify="center">
+          <v-btn
+          color="accent"
+          elevation="2"
+          >Показать все предприятия</v-btn>
+        </v-row>
+      </v-col>
+      <v-col
+        class="mb-5"
+        cols="12"
+      >
+        <v-row justify="center">
+          <v-btn
+          color="accent"
+          elevation="2"
+          >Загрузить данные</v-btn>
+        </v-row>
+      </v-col>
+     
 
       <v-col
         class="mb-5"
         cols="12"
       >
-        <h2 class="headline font-weight-bold mb-3">
+      <v-row>
+        <!--<h2 class="headline font-weight-bold mb-3">
           What's next?
         </h2>
+        
+         <div class="regular-page-area content-padding-40" style="margin-bottom: 5rem;">
+                  <div class="container">
+                      <div class="row">
+                          <div class="col-12">
+                              <div class="page-content white-bg show-main-block" style="display: none;" id="show-groups-block">
+                                  <table id="main_info_tb" class="table">
 
+                                  </table>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>-->
+        <Card/>
+        </v-row>
         <v-row justify="center">
           <a
             v-for="(next, i) in whatsNext"
@@ -43,6 +74,7 @@
           >
             {{ next.text }}
           </a>
+          
         </v-row>
       </v-col>
     </v-row>
@@ -50,8 +82,15 @@
 </template>
 
 <script>
+
+  import Card from './Card';
+
+
   export default {
-    name: 'HelloWorld',
+    name: 'MainFragment',
+    components: {
+      Card,
+    },
 
     data: () => ({
       ecosystem: [

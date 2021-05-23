@@ -14,15 +14,7 @@
           transition="scale-transition"
           width="40"
         />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
+         <span class="mr-2 shrink mt-1 hidden-sm-and-down">Report Loader Vue app</span>
       </div>
 
       <v-spacer></v-spacer>
@@ -32,25 +24,28 @@
         target="_blank"
         text
       >
-        <span class="mr-2">Latest Release</span>
+        <span class="mr-2">Загрузить данные</span>
         <v-icon>mdi-open-in-new</v-icon>
       </v-btn>
     </v-app-bar>
 
     <v-main>
-      <HelloWorld/>
+      <MainFragment/>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+import MainFragment from './components/MainFragment';
+//import MainTable from './components/MainTable';
+//import Card from './components/Card';
 
 export default {
   name: 'App',
 
   components: {
-    HelloWorld,
+    MainFragment,
+
   },
 
   data: () => ({

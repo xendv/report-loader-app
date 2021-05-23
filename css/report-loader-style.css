@@ -1,0 +1,46 @@
+.header-area{
+
+}
+
+/*#sticky-footer {
+  flex-shrink: none;
+}*/
+
+:root{--bg-accent-blue: #87CEFA;}
+.footer{
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: var(--bg-accent-blue);
+}
+
+body {
+  min-height: 100%;
+  margin-bottom: 60px;
+}
+
+.bg-accent-blue{
+    background-color: #87CEFA;
+}
+
+.bg-white-blue{
+    background-color: #e8f6ff;
+}
+
+h1{
+    align-self: center;
+}
+content-block{
+    align-content: center;
+    padding: 10px;
+}
+main {
+    min-height: 100%;
+}
+
+#app {
+    height: 100%;
+}
