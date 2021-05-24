@@ -11,8 +11,43 @@
       lastIcon: 'mdi-arrow-collapse-right',
       prevIcon: 'mdi-minus',
       nextIcon: 'mdi-plus'
+
     }"
-  ></v-data-table>
+    
+  >
+  <template v-slot:top>
+    <v-toolbar flat>
+      <v-btn
+        outlined
+        rounded
+        text
+        v-bind="attrs"
+        v-on="on"
+        @click="addElement"
+      >
+        Добавить стандартный элемент
+      </v-btn>
+       <v-dialog
+          v-model="dialog"
+          max-width="500px"
+          
+        >
+       <!--<template v-slot:activator="{ on, attrs }">
+        <v-btn
+        outlined
+        rounded
+        text
+        v-bind="attrs"
+        v-on="on"
+      >
+        Button
+      </v-btn>
+      </template>-->
+      </v-dialog>
+    </v-toolbar>
+  </template>
+  </v-data-table>
+  
 </template>
 <script>
   export default {
@@ -27,8 +62,12 @@
           { text: 'ОКПО', value: 'okpo' },
           { text: 'Название предприятия', value: 'name' },
         ],
+        /*data:{
+          main_info: []
+        },*/
+        
         main_info: [
-          {
+          /*{
             id: '1',
             okpo: '12134335',
             name: '"Квадратные штаны"',
@@ -56,9 +95,16 @@
           {
             name: 'KitKat',
             category: 'Candy',
-          },
+          },*/
         ],
       }
+
     },
+    methods: {
+          addElement: function() {
+            this.main_info.push({id: '1', okpo: '12134335',
+            name: '"Квадратные штаны"'})
+          }
+        },
   }
 </script>

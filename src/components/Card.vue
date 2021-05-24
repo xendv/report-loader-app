@@ -3,17 +3,18 @@
     class="mx-auto"
     max-width="800"
     min-width="700"
+    isHidden=true
     outlined
   >
     <v-list-item three-line>
       <v-list-item-content>
-        <div class="overline mb-4">
+        <!-- <div class="overline mb-4">
           OVERLINE
-        </div>
+        </div> -->
         <v-list-item-title class="headline mb-1">
-          Headline 5
+          Предприятия
         </v-list-item-title>
-        <v-list-item-subtitle>Greyhound divisely hello coldly fonwderfully</v-list-item-subtitle>
+        <!-- <v-list-item-subtitle>Greyhound divisely hello coldly fonwderfully</v-list-item-subtitle> -->
       <div class="overline mb-4 pa-4 v-sheet theme--light rounded"><MainTable/></div>
       </v-list-item-content>
     </v-list-item>
