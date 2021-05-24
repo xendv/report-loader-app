@@ -10,5 +10,13 @@ new Vue({
   vuetify,
   router,
   store,
-  render: h => h(App)
+  render: h => h(App),
+  watch: {
+    
+  },
+  /*computed:{
+    main_info () {
+      return store.state.main_info_data
+    }
+  }*/
 }).$mount('#app')

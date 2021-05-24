@@ -1,7 +1,7 @@
-Vue.component('table-main',{
+/*Vue.component('table-main',{
   template: ''
 })
-/*import Vuetify from 'vuetify'
+import Vuetify from 'vuetify'
 
 export default ({
   Vue,      // the version of Vue being used in the VuePress app

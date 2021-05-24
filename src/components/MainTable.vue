@@ -1,7 +1,7 @@
 <template>
   <v-data-table
     :headers="headers"
-    :items="main_info"
+    :items="this.$store.state.main_info_data"
     :items-per-page="5"
     item-key="name"
     class="elevation-1"
@@ -21,21 +21,21 @@
         outlined
         rounded
         text
-        v-bind="attrs"
-        v-on="on"
+        
         @click="addElement"
       >
         Добавить стандартный элемент
       </v-btn>
        <v-dialog
-          v-model="dialog"
+          
           max-width="500px"
           
         >
        <!--<template v-slot:activator="{ on, attrs }">
         <v-btn
-        outlined
-        rounded
+        outlined у v-dialog : v-model="dialog"
+        rounded  v-bind="attrs"
+            v-on="on"
         text
         v-bind="attrs"
         v-on="on"
@@ -82,29 +82,27 @@
             okpo: '24547869',
             name: '"Всё в шоколаде"',
           },
-        ],
-        desserts: [
-          {
-            name: 'Frozen Yogurt',
-            category: 'Ice cream',
-          },
-          {
-            name: 'Ice cream sandwich',
-            category: 'Ice cream',
-          },
-          {
-            name: 'KitKat',
-            category: 'Candy',
-          },*/
+        */
         ],
       }
 
     },
     methods: {
           addElement: function() {
-            this.main_info.push({id: '1', okpo: '12134335',
-            name: '"Квадратные штаны"'})
-          }
-        },
+            this.$store.commit('addNewCompanyData', {id: '1',
+            okpo: '12134335',
+            name: '"Квадратные штаны"'}, {});
+            this.consoleShowEditedItem();
+          },
+          consoleShowEditedItem() {
+            console.log(this.$store.state.main_info_data);
+            //this.main_info = this.$store.main_info_data;
+            }
+    },
+    /*watch: {
+      addElement() {
+         console.log(`We have ${this.$store.main_info} fruits now, yay!`)
+      }
+    }*/
   }
 </script>
