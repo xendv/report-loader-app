@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
     main_info_data: [],
     ind_data: [],
+    files: [],
   },
   getters: {
     get_main_info_data(state){
@@ -17,6 +18,9 @@ export default new Vuex.Store({
     },
     main_info (state) {
       return state.main_info_data
+    },
+    files (state) {
+      return state.files
     }
   },
   mutations: {

@@ -3,7 +3,7 @@
     :headers="headers"
     :items="this.$store.state.main_info_data"
     :items-per-page="5"
-    item-key="name"
+    item-key="okpo"
     class="elevation-1"
     :footer-props="{
       showFirstLastPage: true,
@@ -15,14 +15,14 @@
     }"
     
   >
-  <template v-slot:top>
+  <!--<template v-slot:top>
     <v-toolbar flat>
       <v-btn
         outlined
         rounded
         text
         
-        @click="addElement"
+        
       >
         Добавить стандартный элемент
       </v-btn>
@@ -31,7 +31,7 @@
           max-width="500px"
           
         >
-       <!--<template v-slot:activator="{ on, attrs }">
+       <template v-slot:activator="{ on, attrs }">
         <v-btn
         outlined у v-dialog : v-model="dialog"
         rounded  v-bind="attrs"
@@ -42,10 +42,10 @@
       >
         Button
       </v-btn>
-      </template>-->
+      </template>
       </v-dialog>
     </v-toolbar>
-  </template>
+  </template>-->
   </v-data-table>
   
 </template>

@@ -32,10 +32,24 @@
         cols="12"
       >
         <v-row justify="center">
-          <v-btn
-          color="accent"
-          elevation="2"
-          >Загрузить данные</v-btn>
+          <div class="input_wrapper">
+            <label for="file_selector">Загрузить файл</label>
+            <input
+
+            color="accent"
+            elevation="2"
+            id="file_selector"
+            name="file_selector"
+            accept=".csv, .dbf"
+            class="v-btn input file_selector"
+            type="file"
+            @click="uploadDataClick"
+            multiple
+            
+            />
+            
+          </div>
+
         </v-row>
       </v-col>
      
@@ -143,6 +157,49 @@
           href: 'https://vuetifyjs.com/getting-started/frequently-asked-questions',
         },
       ],
+
     }),
+
+    methods: {
+      uploadDataClick: function(){
+        console.log("Сработал uploadDataClick");
+
+        const fileSelector = document.getElementById('file_selector');
+        fileSelector.addEventListener('change', (event) => {
+          const fileList = event.target.files;
+          console.log(fileList);
+          this.uploadFiles(fileList);
+        });
+        var file = document.getElementById('file_selector').files[0];//this.file_selector.files[0]; 
+        if (file) { 
+          console.log("Успешно");//upload(file);
+          //this.uploadFiles();
+        }
+        else console.log("Файл не выбран");
+        //this.uploadFiles();
+      },
+      uploadFiles: function(fileList) {
+        console.log("Сработал uploadFiles");
+        var file=fileList[0]//document.getElementById('file_selector').files[0];
+        if (file) { 
+          console.log("Есть файл для загрузки");//upload(file);
+          var xhr1 = new XMLHttpRequest(); // обработчик для закачки 
+          xhr1.upload.onprogress = function(event) { 
+            console.log(event.loaded + ' / ' + event.total);
+          } // обработчики успеха и ошибки // если status == 200, то это успех, иначе ошибка 
+          xhr1.onload = xhr1.onerror = function() { 
+            if (this.status == 200) { console.log("success"); } 
+            else { console.log("error " + this.status); }
+          }; 
+          xhr1.open("POST", "upload", true); 
+          xhr1.send(file); 
+          var formData = new FormData(); 
+          formData.append("myfile", file); 
+          xhr1.send(formData);
+        }
+        else console.log("Файлa нет");
+    
+      }
+    }
   }
 </script>
