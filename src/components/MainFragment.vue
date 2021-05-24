@@ -13,7 +13,9 @@
       <v-col class="mb-4">
         <h1 class="display-2 font-weight-bold mb-3">
           Добро пожаловать в Report Loader
+
         </h1>
+
       </v-col>
 
        <v-col
@@ -32,7 +34,7 @@
         cols="12"
       >
         <v-row justify="center">
-          <div class="input_wrapper">
+          <form class="input_wrapper" action="../scripts/upload" method="POST">
             <label for="file_selector">Загрузить файл</label>
             <input
 
@@ -47,8 +49,8 @@
             multiple
             
             />
-            
-          </div>
+            <progress min="0" max="100" value="0">0% complete</progress>
+          </form>
 
         </v-row>
       </v-col>
@@ -98,6 +100,8 @@
 <script>
 
   import Card from './Card';
+  //import upload from '../scripts/upload.php';
+  //import dataBaseManager from '../scripts/classes/dataBaseManager.php';
 
 
   export default {
@@ -173,29 +177,47 @@
         var file = document.getElementById('file_selector').files[0];//this.file_selector.files[0]; 
         if (file) { 
           console.log("Успешно");//upload(file);
-          //this.uploadFiles();
         }
         else console.log("Файл не выбран");
-        //this.uploadFiles();
       },
+
       uploadFiles: function(fileList) {
         console.log("Сработал uploadFiles");
         var file=fileList[0]//document.getElementById('file_selector').files[0];
         if (file) { 
           console.log("Есть файл для загрузки");//upload(file);
-          var xhr1 = new XMLHttpRequest(); // обработчик для закачки 
-          xhr1.upload.onprogress = function(event) { 
+          var xhr = new XMLHttpRequest(); // обработчик для закачки 
+          xhr.upload.onprogress = function(event) { 
             console.log(event.loaded + ' / ' + event.total);
           } // обработчики успеха и ошибки // если status == 200, то это успех, иначе ошибка 
-          xhr1.onload = xhr1.onerror = function() { 
+          xhr.onload = xhr.onerror = function() { 
             if (this.status == 200) { console.log("success"); } 
             else { console.log("error " + this.status); }
           }; 
-          xhr1.open("POST", "upload", true); 
-          xhr1.send(file); 
+          //console.log(this.$route);
+          var upload_dir="upload";
+          console.log("Директория для загрузки: ",upload_dir);
+          xhr.open("POST", upload_dir, true); 
+
+          var progressBar = document.querySelector('progress');
+          xhr.upload.onprogress = function(e) { // <<<
+            if (e.lengthComputable) {
+              progressBar.value = (e.loaded / e.total) * 100;
+              progressBar.textContent = progressBar.value; // Если браузер не поддерживает элемент progress
+            }
+          };
+          xhr.onload = function() {
+            if (xhr.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+              alert(`Ошибка ${xhr.status}: ${xhr.statusText}`); // Например, 404: Not Found
+            } else { // если всё прошло гладко, выводим результат
+              alert(`Готово, получили ${xhr.response.length} байт`); // response -- это ответ сервера
+
+            }
+          };
+          //xhr.send(file); 
           var formData = new FormData(); 
-          formData.append("myfile", file); 
-          xhr1.send(formData);
+          formData.append("file", file,); 
+          xhr.send(formData);
         }
         else console.log("Файлa нет");
     
