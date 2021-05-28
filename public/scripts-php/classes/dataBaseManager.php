@@ -31,8 +31,9 @@ class dataBaseManager {
             die('Could not connect');
         }
         else {
+            $db_connection=$dbconnect;
             // set schema
-            $query = "SET search_path TO ftei;";
+            /*$query = "SET search_path TO ftei;";
             $res = pg_query($dbconnect, $query);
             
             //getting data from db
@@ -41,7 +42,8 @@ class dataBaseManager {
             while ($row = pg_fetch_row($res)) {
                 echo "tableName: $row[0] columnName: $row[1]";
                 echo "<br />\n";
-            }
+            }*/
+            return true;
         }
     }
 }

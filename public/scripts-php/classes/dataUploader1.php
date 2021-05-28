@@ -41,7 +41,10 @@ class dataUploader {
     public function connect()
     {
         $dataBaseManager = new dataBaseManager;
-        $dataBaseManager->connectToDb();
+        if ($dataBaseManager->connectToDb()){
+            alert("Connected");
+        }
+        else alert("Error in connection");
     }
     
     

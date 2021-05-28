@@ -34,50 +34,37 @@
         cols="12"
       >
         <v-row justify="center">
-          <form class="input_wrapper" action="../scripts/upload" method="POST">
-            <label for="file_selector">Загрузить файл</label>
+          <div class="input_wrapper" id="input_wrapper" >
+            <label for="file_selector">Загрузить файл
             <input
 
             color="accent"
             elevation="2"
-            id="file_selector"
+            id="file"
+            ref="file"
+            v-on:change="onChangeFileUpload()"
+            
             name="file_selector"
             accept=".csv, .dbf"
             class="v-btn input file_selector"
             type="file"
-            @click="uploadDataClick"
             multiple
             
             />
+            </label>
+            <button v-on:click="submitForm()">Upload</button>
             <progress min="0" max="100" value="0">0% complete</progress>
-          </form>
+          </div>
+          
 
         </v-row>
       </v-col>
-     
 
       <v-col
         class="mb-5"
         cols="12"
       >
       <v-row>
-        <!--<h2 class="headline font-weight-bold mb-3">
-          What's next?
-        </h2>
-        
-         <div class="regular-page-area content-padding-40" style="margin-bottom: 5rem;">
-                  <div class="container">
-                      <div class="row">
-                          <div class="col-12">
-                              <div class="page-content white-bg show-main-block" style="display: none;" id="show-groups-block">
-                                  <table id="main_info_tb" class="table">
-
-                                  </table>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>-->
         <Card/>
         </v-row>
         <v-row justify="center">
@@ -99,6 +86,9 @@
 
 <script>
 
+  /*document.getElementById('input_wrapper').addEventListener('submit', function(ev){
+    ev.preventDefault()
+      });*/
   import Card from './Card';
   //import upload from '../scripts/upload.php';
   //import dataBaseManager from '../scripts/classes/dataBaseManager.php';
@@ -111,19 +101,9 @@
     },
 
     data: () => ({
+      file: '',
       ecosystem: [
-        {
-          text: 'vuetify-loader',
-          href: 'https://github.com/vuetifyjs/vuetify-loader',
-        },
-        {
-          text: 'github',
-          href: 'https://github.com/vuetifyjs/vuetify',
-        },
-        {
-          text: 'awesome-vuetify',
-          href: 'https://github.com/vuetifyjs/awesome-vuetify',
-        },
+        
       ],
       importantLinks: [
         {
@@ -165,7 +145,40 @@
     }),
 
     methods: {
-      uploadDataClick: function(){
+      submitForm(){
+        let formData = new FormData();
+        formData.append('file', this.file);
+        /*const options={
+          method: 'POST',
+          headers: { 'content-type': 'application/form-data' },
+          data: formData,
+          url: 'api.php',
+        }*/
+
+        this.axios.post('http://localhost/report-loader-app-server/api.php',
+            formData,
+            {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+                //'Content-Type': 'application/php'
+            }
+          }
+        ).then(function(data){
+          console.log(data.data);
+        })
+
+        .catch(function(error){
+          console.log('FAILURE!! ',error);
+        });
+      
+      },
+
+      onChangeFileUpload(){
+        this.file = this.$refs.file.files[0];
+      },
+      onSubmit(){ev =>{ev.preventDefault()}},
+
+      /*uploadDataClick: function(){
         console.log("Сработал uploadDataClick");
 
         const fileSelector = document.getElementById('file_selector');
@@ -221,7 +234,7 @@
         }
         else console.log("Файлa нет");
     
-      }
+      }*/
     }
   }
 </script>
