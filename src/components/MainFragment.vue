@@ -160,7 +160,6 @@
             {
             headers: {
                 'Content-Type': 'multipart/form-data'
-                //'Content-Type': 'application/php'
             }
           }
         ).then(function(data){
