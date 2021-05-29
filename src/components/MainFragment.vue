@@ -52,8 +52,8 @@
             
             />
             </label>
-            <button v-on:click="submitForm()">Upload</button>
-            <progress min="0" max="100" value="0">0% complete</progress>
+            <!--<button v-on:click="sendFileToServerByAxios()">Upload</button>
+            <progress min="0" max="100" value="0">0% complete</progress>-->
           </div>
           
 
@@ -145,9 +145,19 @@
     }),
 
     methods: {
-      submitForm(){
+      onChangeFileUpload(){
+        this.file = this.$refs.file.files[0];
+        this.ext=''; 
+        let parts = this.$refs.file.files[0].name.split('.');
+        if (parts.length > 1) this.ext = parts.pop();
+        this.sendFileToServerByAxios();
+      },
+
+      sendFileToServerByAxios(){
         let formData = new FormData();
         formData.append('file', this.file);
+        formData.append('action', 'sendFileContent');
+        formData.append('type', this.ext);
         /*const options={
           method: 'POST',
           headers: { 'content-type': 'application/form-data' },
@@ -165,16 +175,11 @@
         ).then(function(data){
           console.log(data.data);
         })
-
         .catch(function(error){
           console.log('FAILURE!! ',error);
         });
-      
       },
 
-      onChangeFileUpload(){
-        this.file = this.$refs.file.files[0];
-      },
       onSubmit(){ev =>{ev.preventDefault()}},
 
       /*uploadDataClick: function(){
