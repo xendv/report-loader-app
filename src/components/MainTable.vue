@@ -67,12 +67,12 @@
         },*/
         
         main_info: [
-          /*{
+          {
             id: '1',
             okpo: '12134335',
             name: '"Квадратные штаны"',
           },
-          {
+          /*{
             id: '2',
             okpo: '57692312',
             name: '"Ломай-убирай"',
@@ -99,6 +99,33 @@
             //this.main_info = this.$store.main_info_data;
             }
     },
+    created: function(){
+      
+      let formData = new FormData();
+      let self = this
+        formData.append('action', 'getDBMainContent');
+        this.axios.post('http://localhost/report-loader-app-server/api.php',
+              formData,
+              {
+              headers: {
+                  'Content-Type': 'multipart/form-data'
+              }
+            }
+          ).then(function(data){
+            console.log("Got main_info from DB");
+             console.log(data.data);
+            console.log(JSON.stringify(data.data));
+
+            //console.log(data.headers);
+            self.$store.state.main_info_data=data.data;
+            
+          })
+          .catch(function(error){
+            console.log('FAILURE IN QUERY!! ',error);
+          });
+        //this.$store.state.main_info_data=data;
+      
+    }
     /*watch: {
       addElement() {
          console.log(`We have ${this.$store.main_info} fruits now, yay!`)

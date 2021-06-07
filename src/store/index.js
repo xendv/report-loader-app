@@ -21,13 +21,30 @@ export default new Vuex.Store({
     },
     files (state) {
       return state.files
-    }
+    },
   },
   mutations: {
     addNewCompanyData (state, company_main_data, company_ind_data) {
       state.main_info_data.push(company_main_data);
       state.ind_data.push(company_ind_data);
-    }
+    },
+    /*getDataFromDatabase(){
+      let formData = new FormData();
+      formData.append('action', 'getDBContent');
+      this.axios.post('http://localhost/report-loader-app-server/api.php',
+            {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+          }
+        ).then(function(data){
+          console.log(data.data);
+          this.state.main_info_data=data.data;
+        })
+        .catch(function(error){
+          console.log('FAILURE IN QUERY!! ',error);
+        });
+    }*/
   },
   watch: {
 
@@ -36,6 +53,7 @@ export default new Vuex.Store({
     /*addCompanyData (state, company_main_data, company_ind_data){
       
     }*/
+
   },
   modules: {
   }

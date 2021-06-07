@@ -174,6 +174,7 @@
           }
         ).then(function(data){
           console.log(data.data);
+
         })
         .catch(function(error){
           console.log('FAILURE!! ',error);
@@ -181,6 +182,8 @@
       },
 
       onSubmit(){ev =>{ev.preventDefault()}},
+
+      
 
       /*uploadDataClick: function(){
         console.log("Сработал uploadDataClick");
