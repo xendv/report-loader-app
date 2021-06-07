@@ -8,6 +8,9 @@ export default new Vuex.Store({
     main_info_data: [],
     ind_data: [],
     files: [],
+    temp_main_info_data: [],
+    temp_ind_data: [],
+    last_expanded: "",
   },
   getters: {
     get_main_info_data(state){

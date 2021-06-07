@@ -1,8 +1,8 @@
 <template>
   <v-card
     class="mx-auto"
-    max-width="800"
-    min-width="700"
+    max-width="1100"
+    min-width="900"
     isHidden=true
     outlined
   >

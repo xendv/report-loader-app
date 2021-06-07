@@ -37,8 +37,6 @@
 
 <script>
 import MainFragment from './components/MainFragment';
-//import MainTable from './components/MainTable';
-//import Card from './components/Card';
 
 export default {
   name: 'App',
@@ -49,6 +47,7 @@ export default {
 
   data: () => ({
     //
+
   }),
 };
 </script>

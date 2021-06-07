@@ -66,6 +66,7 @@
       >
       <v-row>
         <Card/>
+        
         </v-row>
         <v-row justify="center">
           <a
@@ -79,6 +80,7 @@
           </a>
           
         </v-row>
+        <UploadedDataTable/>
       </v-col>
     </v-row>
   </v-container>
@@ -90,6 +92,7 @@
     ev.preventDefault()
       });*/
   import Card from './Card';
+  import UploadedDataTable from './UploadedDataTable';
   //import upload from '../scripts/upload.php';
   //import dataBaseManager from '../scripts/classes/dataBaseManager.php';
 
@@ -98,10 +101,12 @@
     name: 'MainFragment',
     components: {
       Card,
+      UploadedDataTable,
     },
 
     data: () => ({
       file: '',
+      
       ecosystem: [
         
       ],
@@ -158,6 +163,7 @@
         formData.append('file', this.file);
         formData.append('action', 'sendFileContent');
         formData.append('type', this.ext);
+        let self=this;
         /*const options={
           method: 'POST',
           headers: { 'content-type': 'application/form-data' },
@@ -173,7 +179,9 @@
             }
           }
         ).then(function(data){
+          console.log("Got data from file");
           console.log(data.data);
+          self.$emit('showUploadedDataTableDialog');
 
         })
         .catch(function(error){
@@ -182,8 +190,6 @@
       },
 
       onSubmit(){ev =>{ev.preventDefault()}},
-
-      
 
       /*uploadDataClick: function(){
         console.log("Сработал uploadDataClick");
