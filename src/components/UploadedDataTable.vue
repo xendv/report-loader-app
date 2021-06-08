@@ -1,74 +1,103 @@
 <template>
-  <v-row justify="center">
-    <v-dialog
-      v-model="dialog"
-      scrollable
-      persistent
-      max-width="900px"
-    >
-      <v-card>
-        <v-card-title>Данные из загруженного файла</v-card-title>
-        <v-divider></v-divider>
-        <v-card-text style="height: 300px;">
-          <v-radio-group
-            v-model="dialogm1"
-            column
-          >
-            <v-radio
-              label="Bahamas, The"
-              value="bahamas"
-            ></v-radio>
-            
-            <v-radio
-              label="Burma"
-              value="burma"
-            ></v-radio>
-            <v-radio
-              label="Burundi"
-              value="burundi"
-            ></v-radio>
-          </v-radio-group>
-        </v-card-text>
-        <v-divider></v-divider>
-        
-        <v-card-actions>
+  <v-data-table
+    :headers="headers"
+    :items="itemsFromFile"
+    hide-default-footer
+    class="elevation-1"
+  >
 
-          <v-btn
-            color="blue darken-1"
-            text
-            @click="dialog = false"
-          >
-            Close
-          </v-btn>
-          <v-btn
-            color="blue darken-1"
-            text
-            @click="dialog = false"
-          >
-            Save
-          </v-btn>
-
-        </v-card-actions>
-        
-      </v-card>
-    </v-dialog>
-  </v-row>
+  </v-data-table>
+  
 </template>
 <script>
   export default {
     data () {
       return {
-        dialogm1: '',
-        dialog: false,
+        headers: [
+          /*{ text: 'Чистая прибыль', value: 'profit', sortable: false, },
+          { text: 'Выручка', value: 'revenue', sortable: false, },
+          { text: 'Средняя заработная плата', value: 'salary', sortable: false, },
+          { text: 'Средняя численность работников', value: 'people', sortable: false, },
+          { text: 'Кредиторская задолженность', value: 'payable', sortable: false, },
+          { text: 'Дебиторская задолженность', value: 'receivable', sortable: false, },
+          */
+        ],
+        itemsFromFile: [
+          /*{
+            profit: '1',
+            revenue: '12134335',
+            salary: '1',
+            people: '12134335',
+            payable: '"Квадратные штаны"',
+            recievable: '"Квадратные штаны"',
+          },
+         */
+        ],
       }
+
     },
     methods: {
-        openDialog(){
-            this.dialog = true;
+      getIndexes() {
+        let expanded_okpo=this.$store.state.last_expanded;
+        let formData = new FormData();
+        let self = this
+          formData.append('action', 'getDBIndContent');
+          formData.append('okpo', expanded_okpo);
+          this.axios.post('http://localhost/report-loader-app-server/api.php',
+                formData,
+                {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+              }
+            ).then(function(data){
+              console.log("Got indexes from DB for okpo=",expanded_okpo);
+              console.log(data.data);
+              console.log(JSON.stringify(data.data));
+
+              //console.log(data.headers);
+              self.indexes=data.data;
+              
+            })
+            .catch(function(error){
+              console.log('FAILURE IN INDEXES QUERY!! ',error);
+            });
+          //this.$store.state.main_info_data=data;
+        
         },
+        fillUploadedData() {
+          
+          
+          this.itemsFromFile=JSON.parse(JSON.parse(this.$store.state.temp_data));
+
+          let obj=JSON.parse(JSON.parse(this.$store.state.temp_data));
+          //console.log(Object.keys(obj[0]));
+          //this.headers=Object.keys(obj[0]).map(e=> e.toLowerCase());
+          console.log(Object.keys(obj[0]));
+          for (let header_name of Object.keys(obj[0])){
+            this.headers.push({text: header_name, value: header_name, sortable: false,} );
+          }
+          
+          console.log("HEADERS   ",this.headers, "  HEADERS");
+          
+            //this.$store.state.main_info_data=data;
+        
+        },
+          
     },
     created: function(){
-        this.$parent.$on('showUploadedDataTableDialog', this.openDialog);
+      //this.$parent.$on('getExpanded', this.getIndexes());
+      //console.log("ХЭДЕРЫ   ",this.headers, "  ХЭДЕРЫ");
+      this.fillUploadedData();
+      //this.$parent.$on('fillUploadedDataTable', this.fillUploadedData);
+    },
+    mounted: function(){
+      //console.log(this.$parent.last_expanded);
     }
+    /*watch: {
+      addElement() {
+         console.log(`We have ${this.$store.main_info} fruits now, yay!`)
+      }
+    }*/
   }
 </script>

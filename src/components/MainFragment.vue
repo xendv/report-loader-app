@@ -80,7 +80,7 @@
           </a>
           
         </v-row>
-        <UploadedDataTable/>
+        <UploadedDataDialog/>
       </v-col>
     </v-row>
   </v-container>
@@ -92,7 +92,7 @@
     ev.preventDefault()
       });*/
   import Card from './Card';
-  import UploadedDataTable from './UploadedDataTable';
+  import UploadedDataDialog from './UploadedDataDialog';
   //import upload from '../scripts/upload.php';
   //import dataBaseManager from '../scripts/classes/dataBaseManager.php';
 
@@ -101,7 +101,7 @@
     name: 'MainFragment',
     components: {
       Card,
-      UploadedDataTable,
+      UploadedDataDialog,
     },
 
     data: () => ({
@@ -180,7 +180,11 @@
           }
         ).then(function(data){
           console.log("Got data from file");
-          console.log(data.data);
+          console.log(JSON.parse(data.data));
+          //self.$store.temp_main_info_data=data.;
+          //self.$store.temp_ind_data: [],
+          self.$store.state.temp_data=JSON.stringify(data.data);
+
           self.$emit('showUploadedDataTableDialog');
 
         })

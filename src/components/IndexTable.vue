@@ -74,6 +74,7 @@
     },
     mounted: function(){
       //console.log(this.$parent.last_expanded);
+      
     }
     /*watch: {
       addElement() {

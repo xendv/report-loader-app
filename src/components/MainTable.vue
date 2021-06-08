@@ -167,13 +167,14 @@ import IndexTable from './IndexTable';
             console.log(data.data);
             console.log(JSON.stringify(data.data));
 
-            //console.log(data.headers);
+            //console.log(self.headers);
             self.$store.state.main_info_data=data.data;
             
           })
           .catch(function(error){
             console.log('FAILURE IN QUERY!! ',error);
           });
+          //console.log(this.headers);
         //this.$store.state.main_info_data=data;
       
     }

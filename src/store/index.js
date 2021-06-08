@@ -10,6 +10,7 @@ export default new Vuex.Store({
     files: [],
     temp_main_info_data: [],
     temp_ind_data: [],
+    temp_data: [],
     last_expanded: "",
   },
   getters: {
