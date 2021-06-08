@@ -180,11 +180,11 @@
           }
         ).then(function(data){
           console.log("Got data from file");
-          console.log(JSON.parse(data.data));
+          console.log("PARSE DATA.DATA ",JSON.parse(data.data));
           //self.$store.temp_main_info_data=data.;
           //self.$store.temp_ind_data: [],
-          self.$store.state.temp_data=JSON.stringify(data.data);
-
+          self.$store.state.temp_data=JSON.parse(data.data);
+          console.log("DATA.DATA ",data.data);
           self.$emit('showUploadedDataTableDialog');
 
         })

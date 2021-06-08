@@ -68,13 +68,10 @@
         fillUploadedData() {
           
           
-          this.itemsFromFile=JSON.parse(JSON.parse(this.$store.state.temp_data));
+          this.itemsFromFile=this.$store.state.temp_data;
 
-          let obj=JSON.parse(JSON.parse(this.$store.state.temp_data));
-          //console.log(Object.keys(obj[0]));
-          //this.headers=Object.keys(obj[0]).map(e=> e.toLowerCase());
-          console.log(Object.keys(obj[0]));
-          for (let header_name of Object.keys(obj[0])){
+          console.log(Object.keys(this.itemsFromFile[0]));
+          for (let header_name of Object.keys(this.itemsFromFile[0])){
             this.headers.push({text: header_name, value: header_name, sortable: false,} );
           }
           
