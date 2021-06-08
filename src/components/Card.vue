@@ -19,7 +19,7 @@
       </v-list-item-content>
     </v-list-item>
 
-    <v-card-actions>
+    <!--<v-card-actions>
       <v-btn
         outlined
         rounded
@@ -27,7 +27,7 @@
       >
         Button
       </v-btn>
-    </v-card-actions>
+    </v-card-actions>-->
   </v-card>
 </template>
 

@@ -59,6 +59,7 @@
 
               //console.log(data.headers);
               self.indexes=data.data;
+              console.log(self.indexes);
               
             })
             .catch(function(error){

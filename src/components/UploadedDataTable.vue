@@ -1,7 +1,7 @@
 <template>
   <v-data-table
-    :headers="headers"
-    :items="itemsFromFile"
+    :headers="this.$store.state.temp_data_headers"
+    :items="this.$store.state.temp_data"
     hide-default-footer
     class="elevation-1"
   >
@@ -37,59 +37,43 @@
 
     },
     methods: {
-      getIndexes() {
-        let expanded_okpo=this.$store.state.last_expanded;
-        let formData = new FormData();
-        let self = this
-          formData.append('action', 'getDBIndContent');
-          formData.append('okpo', expanded_okpo);
-          this.axios.post('http://localhost/report-loader-app-server/api.php',
-                formData,
-                {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-              }
-            ).then(function(data){
-              console.log("Got indexes from DB for okpo=",expanded_okpo);
-              console.log(data.data);
-              console.log(JSON.stringify(data.data));
-
-              //console.log(data.headers);
-              self.indexes=data.data;
-              
-            })
-            .catch(function(error){
-              console.log('FAILURE IN INDEXES QUERY!! ',error);
-            });
-          //this.$store.state.main_info_data=data;
-        
-        },
         fillUploadedData() {
-          
-          
-          this.itemsFromFile=this.$store.state.temp_data;
+          //this.itemsFromFile=this.$store.state.temp_data;
+          //this.headers=this.$store.state.temp_data_headers;
 
-          console.log(Object.keys(this.itemsFromFile[0]));
-          for (let header_name of Object.keys(this.itemsFromFile[0])){
+          //console.log(Object.keys(this.itemsFromFile[0]));
+          /*for (let header_name of Object.keys(this.itemsFromFile[0])){
             this.headers.push({text: header_name, value: header_name, sortable: false,} );
-          }
+          }*/
           
-          console.log("HEADERS   ",this.headers, "  HEADERS");
+          //console.log("HEADERS   ",this.headers, "  HEADERS");
+          //this.$store.state.temp_data_headers=this.headers;
           
             //this.$store.state.main_info_data=data;
         
         },
+        /*clearTempData(){
+          this.headers=[];
+          this.itemsFromFile=[];
+          this.$store.temp_data=[];
+        }*/
           
     },
     created: function(){
-      //this.$parent.$on('getExpanded', this.getIndexes());
+      this.$parent.$on('fillData', this.fillUploadedData());
+      //this.$parent.$on('clearTempData', this.clearTempData());
       //console.log("ХЭДЕРЫ   ",this.headers, "  ХЭДЕРЫ");
-      this.fillUploadedData();
+      //this.headers=[];
+      
+      //this.fillUploadedData();
+      
       //this.$parent.$on('fillUploadedDataTable', this.fillUploadedData);
     },
     mounted: function(){
       //console.log(this.$parent.last_expanded);
+      //this.headers=[];
+      
+      //this.fillUploadedData();
     }
     /*watch: {
       addElement() {

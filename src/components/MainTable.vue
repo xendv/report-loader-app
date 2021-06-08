@@ -21,11 +21,10 @@
     :body="{
 
     }"
-    width="1200"
+    min-width="1600"
     @item-expanded ="setLastExpanded"
     
   >
-
     <template v-slot:expanded-item="{ headers }" >
       <td :colspan="headers.length"  >
         <p></p>
@@ -34,57 +33,6 @@
 
       </td>
     </template>
-
-  <!--
-   <template v-slot:expanded-item="{ headers, item }">
-      <td :colspan="headers.length">
-        More info about {{ item.name }}
-      </td>
-    </template>
-    -->
- <!--<v-expansion-panels> 
-    <template v-slot:expanded-item="{ headers, item }">
-       
-      <v-expansion-panel :colspan="headers.length">
-      <td :colspan="headers.length">
-        More info about {{ item.name }}
-      </td>
-      </v-expansion-panel>
-
-    </template>
-    </v-expansion-panels> 
--->
-  <!--<template v-slot:top>
-    <v-toolbar flat>
-      <v-btn
-        outlined
-        rounded
-        text
-        
-        
-      >
-        Добавить стандартный элемент
-      </v-btn>
-       <v-dialog
-          
-          max-width="500px"
-          
-        >
-       <template v-slot:activator="{ on, attrs }">
-        <v-btn
-        outlined у v-dialog : v-model="dialog"
-        rounded  v-bind="attrs"
-            v-on="on"
-        text
-        v-bind="attrs"
-        v-on="on"
-      >
-        Button
-      </v-btn>
-      </template>
-      </v-dialog>
-    </v-toolbar>
-  </template>-->
   </v-data-table>
   
 </template>
@@ -167,7 +115,7 @@ import IndexTable from './IndexTable';
             console.log(data.data);
             console.log(JSON.stringify(data.data));
 
-            //console.log(self.headers);
+            console.log(self.headers);
             self.$store.state.main_info_data=data.data;
             
           })

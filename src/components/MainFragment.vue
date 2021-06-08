@@ -18,7 +18,7 @@
 
       </v-col>
 
-       <v-col
+       <!--<v-col
         class="mb-5"
         cols="12"
       >
@@ -28,7 +28,7 @@
           elevation="2"
           >Показать все предприятия</v-btn>
         </v-row>
-      </v-col>
+      </v-col>-->
       <v-col
         class="mb-5"
         cols="12"
@@ -69,7 +69,7 @@
         
         </v-row>
         <v-row justify="center">
-          <a
+          <!--<a
             v-for="(next, i) in whatsNext"
             :key="i"
             :href="next.href"
@@ -77,7 +77,7 @@
             target="_blank"
           >
             {{ next.text }}
-          </a>
+          </a>-->
           
         </v-row>
         <UploadedDataDialog/>
@@ -106,45 +106,13 @@
 
     data: () => ({
       file: '',
-      
       ecosystem: [
-        
       ],
       importantLinks: [
-        {
-          text: 'Documentation',
-          href: 'https://vuetifyjs.com',
-        },
-        {
-          text: 'Chat',
-          href: 'https://community.vuetifyjs.com',
-        },
-        {
-          text: 'Made with Vuetify',
-          href: 'https://madewithvuejs.com/vuetify',
-        },
-        {
-          text: 'Twitter',
-          href: 'https://twitter.com/vuetifyjs',
-        },
-        {
-          text: 'Articles',
-          href: 'https://medium.com/vuetify',
-        },
+        
       ],
       whatsNext: [
-        {
-          text: 'Explore components',
-          href: 'https://vuetifyjs.com/components/api-explorer',
-        },
-        {
-          text: 'Select a layout',
-          href: 'https://vuetifyjs.com/getting-started/pre-made-layouts',
-        },
-        {
-          text: 'Frequently Asked Questions',
-          href: 'https://vuetifyjs.com/getting-started/frequently-asked-questions',
-        },
+
       ],
 
     }),
@@ -183,10 +151,16 @@
           console.log("PARSE DATA.DATA ",JSON.parse(data.data));
           //self.$store.temp_main_info_data=data.;
           //self.$store.temp_ind_data: [],
-          self.$store.state.temp_data=JSON.parse(data.data);
           console.log("DATA.DATA ",data.data);
+          self.$store.state.temp_data=JSON.parse(data.data);
+          let temp_headers=[];
+          for (let header_name of Object.keys(self.$store.state.temp_data[0])){
+            temp_headers.push({text: header_name, value: header_name, sortable: false,} );
+          }
+          console.log("TEMP HEADERS ",temp_headers);
+          self.$store.state.temp_data_headers=temp_headers;
+          console.log("TEMP DATA ",self.$store.state.temp_data);
           self.$emit('showUploadedDataTableDialog');
-
         })
         .catch(function(error){
           console.log('FAILURE!! ',error);
@@ -252,6 +226,9 @@
         else console.log("Файлa нет");
     
       }*/
+    },
+    created: function(){
+      //this.$$children.UploadedDataDialog.$on('saveDataToDB');
     }
   }
 </script>
