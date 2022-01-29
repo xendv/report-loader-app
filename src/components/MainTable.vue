@@ -2,6 +2,7 @@
   <v-data-table
     :headers="headers"
     :items="this.$store.state.main_info_data"
+    :key="main_data_table"
 
     :items-per-page="5"
     item-key="okpo"
@@ -44,6 +45,7 @@ import IndexTable from './IndexTable';
     },
     data () {
       return {
+        main_data_table: 0,
         headers: [
           {
             text: 'id',
@@ -83,10 +85,13 @@ import IndexTable from './IndexTable';
     },
     methods: {
       addElement: function() {
-        this.$store.commit('addNewCompanyData', {id: '1',
+        /*this.$store.commit('addNewCompanyData', {id: '1',
         okpo: '12134335',
         name: '"Квадратные штаны"'}, {});
         this.consoleShowEditedItem();
+        */
+       //this.$store.commit('addNewCompanyData');
+       
         },
       consoleShowEditedItem() {
         console.log(this.$store.state.main_info_data);
@@ -117,7 +122,7 @@ import IndexTable from './IndexTable';
 
             console.log(self.headers);
             self.$store.state.main_info_data=data.data;
-            
+
           })
           .catch(function(error){
             console.log('FAILURE IN QUERY!! ',error);

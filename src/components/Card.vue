@@ -44,5 +44,10 @@
         data: () => ({
             //
         }),
+        methods: {
+          forceRerender() {
+            this.main_data_table+=1;
+          },
+        }
     };
 </script>

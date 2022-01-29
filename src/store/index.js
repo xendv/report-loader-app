@@ -29,10 +29,10 @@ export default new Vuex.Store({
     },
   },
   mutations: {
-    addNewCompanyData (state, company_main_data, company_ind_data) {
+    addNewCompanyData () {
       /*state.main_info_data.push(company_main_data);
       state.ind_data.push(company_ind_data);
-      */
+      
       let new_data=[];
       for (let arr of self.$store.state.temp_data){
         let new_obj=new Object();
@@ -43,8 +43,8 @@ export default new Vuex.Store({
       }
       //added new data to store
       console.log(new_data);
-      self.$store.state.main_info_data.push(new_data);
-      console.log(self.$store.state.main_info_data);
+      state.main_info_data.push(new_data);
+      console.log(self.$store.state.main_info_data);*/
     },
     /*getDataFromDatabase(){
       let formData = new FormData();

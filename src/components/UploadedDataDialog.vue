@@ -73,7 +73,8 @@
               console.log("Data sent successfully");
               //console.log(response.data);
               //console.log(JSON.stringify(response.data));
-              console.log(self.$store.state.temp_data);
+              console.log("self.$store.state.temp_data: ",self.$store.state.temp_data);
+              self.upd();
               /*let new_data=[];
               for (let arr of self.$store.state.temp_data){
                 let new_obj=new Object();
@@ -100,6 +101,13 @@
         clearTempData(){
           this.$emit('clearTempData');
           this.$store.state.temp_data=[];
+        },
+        upd(){
+          let self = this
+          this.$store.state.temp_data.forEach(function(item) {
+            self.$store.state.main_info_data.push(item)
+          });
+          this.clearTempData();
         }
     },
     created: function(){
