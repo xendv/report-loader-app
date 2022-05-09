@@ -129,8 +129,8 @@
       sendFileToServerByAxios(){
         let formData = new FormData();
         formData.append('file', this.file);
-        formData.append('action', 'sendFileContent');
-        formData.append('type', this.ext);
+        //formData.append('action', 'sendFileContent');
+        //formData.append('type', this.ext);
         let self=this;
         /*const options={
           method: 'POST',
@@ -139,7 +139,7 @@
           url: 'api.php',
         }*/
 
-        this.axios.post('http://localhost/report-loader-app-server/api.php',
+        this.axios.post( 'http://localhost:3333/report-loader/rest/api/upload',//,'http://localhost/report-loader-app-server/api.php'
             formData,
             {
             headers: {
@@ -148,11 +148,12 @@
           }
         ).then(function(data){
           console.log("Got data from file");
-          console.log("PARSE DATA.DATA ",JSON.parse(data.data));
+          console.log("DATA ",data);
+          //console.log("PARSE DATA.DATA ",JSON.parse(data.data));
           //self.$store.temp_main_info_data=data.;
           //self.$store.temp_ind_data: [],
           console.log("DATA.DATA ",data.data);
-          self.$store.state.temp_data=JSON.parse(data.data);
+          self.$store.state.temp_data=data.data;//JSON.parse(data.data);
           let temp_headers=[];
           for (let header_name of Object.keys(self.$store.state.temp_data[0])){
             temp_headers.push({text: header_name, value: header_name, sortable: false,} );

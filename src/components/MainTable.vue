@@ -10,6 +10,7 @@
     :single-expand="singleExpand"
     :expanded.sync="expanded"
     show-expand
+    @item-expanded ="setLastExpanded"
     focusable
     :footer-props="{
       showFirstLastPage: true,
@@ -22,8 +23,8 @@
     :body="{
 
     }"
-    min-width="1600"
-    @item-expanded ="setLastExpanded"
+    min-width="1200"
+
     
   >
     <template v-slot:expanded-item="{ headers }" >
@@ -47,14 +48,14 @@ import IndexTable from './IndexTable';
       return {
         main_data_table: 0,
         headers: [
-          {
+/*          {
             text: 'id',
             align: 'start',
             value: 'id',
-          },
+          },*/
           { text: 'ОКПО', value: 'okpo' },
           { text: 'Название предприятия', value: 'name' },
-          { text: 'Отобразить ФТЭП', value: 'data-table-expand'}
+          { text: '', value: 'data-table-expand'}
         ],
         expanded: [],
         singleExpand: false,
@@ -62,12 +63,12 @@ import IndexTable from './IndexTable';
           main_info: []
         },*/
         
-        main_info: [
+/*        main_info: [
           {
             id: '1',
             okpo: '12134335',
             name: '"Квадратные штаны"',
-          },
+          },*/
           /*{
             id: '2',
             okpo: '57692312',
@@ -78,8 +79,8 @@ import IndexTable from './IndexTable';
             okpo: '24547869',
             name: '"Всё в шоколаде"',
           },
-        */
-        ],
+
+        ],*/
       }
 
     },
@@ -104,12 +105,9 @@ import IndexTable from './IndexTable';
 
     },
     created: function(){
-      
-      let formData = new FormData();
       let self = this
-        formData.append('action', 'getDBMainContent');
-        this.axios.post('http://localhost/report-loader-app-server/api.php',
-              formData,
+        this.axios.get('http://localhost:3333/report-loader/rest/api/main-info',//'http://localhost/report-loader-app-server/api.php',
+              //formData,
               {
               headers: {
                   'Content-Type': 'multipart/form-data'
@@ -118,7 +116,6 @@ import IndexTable from './IndexTable';
           ).then(function(data){
             console.log("Got main_info from DB");
             console.log(data.data);
-            console.log(JSON.stringify(data.data));
 
             console.log(self.headers);
             self.$store.state.main_info_data=data.data;

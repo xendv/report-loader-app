@@ -41,16 +41,15 @@
     methods: {
       getIndexes() {
         let expanded_okpo=this.$store.state.last_expanded;
-        let formData = new FormData();
+        //let formData = new FormData();
         let self = this
-          formData.append('action', 'getDBIndContent');
-          formData.append('okpo', expanded_okpo);
-          this.axios.post('http://localhost/report-loader-app-server/api.php',
-                formData,
+          //formData.append('action', 'getDBIndContent');
+          //formData.append('okpo', expanded_okpo);
+          this.axios.get('http://localhost:3333/report-loader/rest/api/company-info/'+expanded_okpo,//'http://localhost/report-loader-app-server/api.php',
                 {
-                headers: {
+/*                headers: {
                     'Content-Type': 'multipart/form-data'
-                }
+                }*/
               }
             ).then(function(data){
               console.log("Got indexes from DB for okpo=",expanded_okpo);
