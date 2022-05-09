@@ -81,6 +81,7 @@
           
         </v-row>
         <UploadedDataDialog/>
+        <CompanyDataDialog/>
       </v-col>
     </v-row>
   </v-container>
@@ -93,6 +94,7 @@
       });*/
   import Card from './Card';
   import UploadedDataDialog from './UploadedDataDialog';
+  import CompanyDataDialog from './CompanyDataDialog';
   //import upload from '../scripts/upload.php';
   //import dataBaseManager from '../scripts/classes/dataBaseManager.php';
 
@@ -102,6 +104,7 @@
     components: {
       Card,
       UploadedDataDialog,
+      CompanyDataDialog
     },
 
     data: () => ({
