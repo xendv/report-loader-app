@@ -112,7 +112,6 @@
     },
     created: function(){
         this.$parent.$on('showUploadedDataTableDialog', this.openDialog);
-        this.$emit('fillUploadedDataTable');
     }
   }
 </script>

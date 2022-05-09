@@ -129,6 +129,24 @@
         this.sendFileToServerByAxios();
       },
 
+      getIndexes() {
+        let expanded_okpo = this.$store.state.last_expanded;
+        let self = this
+        this.axios.get('http://localhost:3333/report-loader/rest/api/company-info/' + expanded_okpo,//'http://localhost/report-loader-app-server/api.php',
+            {
+            }
+        ).then(function (data) {
+          console.log("Got indexes from DB for okpo=", expanded_okpo);
+          console.log(data.data);
+          self.$store.state.ind_data = data.data;
+          console.log(self.$store.state.ind_data);
+          self.$emit('showCompanyDataTableDialog')
+        })
+            .catch(function (error) {
+              console.log('FAILURE IN INDEXES QUERY!! ', error);
+            });
+      },
+
       sendFileToServerByAxios(){
         let formData = new FormData();
         formData.append('file', this.file);

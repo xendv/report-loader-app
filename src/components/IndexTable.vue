@@ -1,7 +1,7 @@
 <template>
   <v-data-table
       :headers="headers"
-      :items="indexes"
+      :items="this.$store.state.ind_data"
       hide-default-footer
       class="elevation-1"
   >
@@ -21,7 +21,7 @@ export default {
         {text: 'Кредиторская задолженность', value: 'payable', sortable: false,},
         {text: 'Дебиторская задолженность', value: 'receivable', sortable: false,},
       ],
-      okpo: '',
+      //okpo: '',
       indexes: [
         /*{
           /*ofit: '1',
@@ -46,8 +46,9 @@ export default {
       ).then(function (data) {
         console.log("Got indexes from DB for okpo=", expanded_okpo);
         console.log(data.data);
-        self.indexes = data.data;
-        console.log(self.indexes);
+        self.$store.state.ind_data = data.data;
+        console.log(self.$store.state.ind_data);
+        self.$parent.openDialog()
         //self.$emit('showCompanyDataTableDialog')
       })
           .catch(function (error) {
@@ -55,12 +56,18 @@ export default {
           });
     },
     clearIndexes() {
-      this.indexes = []
+      //this.indexes = []
+      this.$store.state.ind_data = []
     },
+    /*upd(){
+      let self = this
+      this.$store.state.temp_ind_data.forEach(function(item) {
+        self.$store.state.ind_data.push(item)
+      });
+      this.clearTempData();
+    }*/
   },
   created: function () {
-    this.$parent.$on('fillCompanyDataTable', this.getIndexes());
-    this.$parent.$on('clearCompanyDataTable', this.clearIndexes());
   },
   mounted: function () {
   }

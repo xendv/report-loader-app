@@ -122,7 +122,8 @@ export default {
       var pickedItem = Object.assign({}, item)
       console.log("Picked company to show with id " + pickedIndex + " and okpo " + pickedItem["okpo"])
       this.$store.state.last_expanded = pickedItem["okpo"]
-      this.parentFragment.$emit('showCompanyDataTableDialog')
+      //this.parentFragment.$emit('showCompanyDataTableDialog')
+      this.parentFragment.getIndexes()
     },
 
   },

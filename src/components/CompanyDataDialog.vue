@@ -43,23 +43,18 @@ export default {
   },
   methods: {
     openDialog() {
-      this.$emit('fillCompanyDataTable');
       this.dialog = true;
     },
     closeDialog() {
       this.dialog = false;
-      this.$emit('clearCompanyDataTable');
+      this.clearTempData()
     },
-    loadDialog() {
-      //this.dialog = false;
-      this.$emit('fillCompanyDataTable');
+    clearTempData(){
+      this.$store.state.ind_data=[];
     },
   },
   created: function () {
-    this.$parent.$on('loadCompanyDataTableDialog', this.loadDialog);
     this.$parent.$on('showCompanyDataTableDialog', this.openDialog);
-    //this.$children.pop().$on('showCompanyDataTableDialog', this.openDialog)
-    //this.$on('showCompanyDataTableDialog', this.openDialog);
   }
 }
 </script>
