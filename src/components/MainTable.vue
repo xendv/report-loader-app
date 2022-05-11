@@ -22,7 +22,6 @@
     }"
       min-width="1200"
 
-
   >
 <!--    <template v-slot:item="props">
       <tr @click="showCompanyData(key, props.item[key])">
@@ -52,7 +51,7 @@
 
 </template>
 <script>
-import IndexTable from './IndexTable';
+import IndexTable from './CompanyDataTable';
 
 export default {
   components: {

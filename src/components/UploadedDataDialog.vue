@@ -56,20 +56,24 @@
             this.dialog = true;
         },
         saveDataToDB(){
-          this.$emit('fillData');
+          //this.$emit('fillData');
           //this.$emit('saveDataToDB');
           let formData = new FormData();
           let self = this
-          formData.append('action', 'saveToDB');
           formData.append('data_to_save', JSON.stringify(self.$store.state.temp_data));
-          this.axios.post('http://localhost/report-loader-app-server/api.php',
-                formData,
-                {
+          console.log("self.$store.state.temp_data: ",self.$store.state.temp_data);
+          console.log("self.$store.state.temp_data JSON: ",JSON.stringify(self.$store.state.temp_data));
+
+          this.axios.post('http://localhost:3333/report-loader/rest/api/upload/save',
+              JSON.stringify(self.$store.state.temp_data),
+              {
                 headers: {
-                    'Content-Type': 'multipart/form-data'
+                  'Content-Type': 'application/json',
+                  'Access-Control-Allow-Origin' : '*',
+                  'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS, post, get'
                 }
               }
-            ).then(function(){
+          ).then(function(){
               console.log("Data sent successfully");
               //console.log(response.data);
               //console.log(JSON.stringify(response.data));

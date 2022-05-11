@@ -10,7 +10,7 @@
         <v-card-title>Данные предприятия</v-card-title>
         <v-divider></v-divider>
         <v-card-text style="height: 300px;">
-          <IndexTable/>
+          <CompanyDataTable/>
         </v-card-text>
         <v-divider></v-divider>
 
@@ -29,11 +29,11 @@
 </template>
 
 <script>
-import IndexTable from './IndexTable';
+import CompanyDataTable from './CompanyDataTable';
 
 export default {
   components: {
-    IndexTable,
+    CompanyDataTable,
   },
   data() {
     return {

@@ -60,7 +60,7 @@
           
     },
     created: function(){
-      this.$parent.$on('fillData', this.fillUploadedData());
+      //this.$parent.$on('fillData', this.fillUploadedData());
       //this.$parent.$on('clearTempData', this.clearTempData());
       //console.log("ХЭДЕРЫ   ",this.headers, "  ХЭДЕРЫ");
       //this.headers=[];

@@ -1,85 +1,80 @@
 <template>
   <v-data-table
       :headers="headers"
-      :items="indexes"
+      :items="this.$store.state.ind_data"
       hide-default-footer
       class="elevation-1"
   >
 
   </v-data-table>
-  
+
 </template>
 <script>
-  export default {
-    data () {
-      return {
-        headers: [
-          { text: 'Чистая прибыль', value: 'profit', sortable: false, },
-          { text: 'Выручка', value: 'revenue', sortable: false, },
-          { text: 'Средняя заработная плата', value: 'salary', sortable: false, },
-          { text: 'Средняя численность работников', value: 'people', sortable: false, },
-          { text: 'Кредиторская задолженность', value: 'payable', sortable: false, },
-          { text: 'Дебиторская задолженность', value: 'receivable', sortable: false, },
+export default {
+  data() {
+    return {
+      headers: [
+        {text: 'Чистая прибыль', value: 'profit', sortable: false,},
+        {text: 'Выручка', value: 'revenue', sortable: false,},
+        {text: 'Средняя заработная плата', value: 'salary', sortable: false,},
+        {text: 'Средняя численность работников', value: 'people', sortable: false,},
+        {text: 'Кредиторская задолженность', value: 'payable', sortable: false,},
+        {text: 'Дебиторская задолженность', value: 'receivable', sortable: false,},
+      ],
+      //okpo: '',
+      indexes: [
+        /*{
+          /*ofit: '1',
+          revenue: '12134335',
+          salary: '1',
+          people: '12134335',
+          payable: '"Квадратные штаны"',
+          recievable: '"Квадратные штаны"',
+          },*/
 
-        ],
-        okpo:'',
-        indexes: [
-          /*{
-            /*ofit: '1',
-            revenue: '12134335',
-            salary: '1',
-            people: '12134335',
-            payable: '"Квадратные штаны"',
-            recievable: '"Квадратные штаны"',
-            },*/
-
-        ],
-      }
-
-    },
-    methods: {
-        fillUploadedData() {
-          //this.itemsFromFile=this.$store.state.temp_data;
-          //this.headers=this.$store.state.temp_data_headers;
-
-          //console.log(Object.keys(this.itemsFromFile[0]));
-          /*for (let header_name of Object.keys(this.itemsFromFile[0])){
-            this.headers.push({text: header_name, value: header_name, sortable: false,} );
-          }*/
-          
-          //console.log("HEADERS   ",this.headers, "  HEADERS");
-          //this.$store.state.temp_data_headers=this.headers;
-          
-            //this.$store.state.main_info_data=data;
-        
-        },
-        /*clearTempData(){
-          this.headers=[];
-          this.itemsFromFile=[];
-          this.$store.temp_data=[];
-        }*/
-          
-    },
-    created: function(){
-      this.$parent.$on('fillData', this.fillUploadedData());
-      //this.$parent.$on('clearTempData', this.clearTempData());
-      //console.log("ХЭДЕРЫ   ",this.headers, "  ХЭДЕРЫ");
-      //this.headers=[];
-      
-      //this.fillUploadedData();
-      
-      //this.$parent.$on('fillUploadedDataTable', this.fillUploadedData);
-    },
-    mounted: function(){
-      //console.log(this.$parent.last_expanded);
-      //this.headers=[];
-      
-      //this.fillUploadedData();
+      ],
     }
-    /*watch: {
-      addElement() {
-         console.log(`We have ${this.$store.main_info} fruits now, yay!`)
-      }
+
+  },
+  methods: {
+    getIndexes() {
+      let expanded_okpo = this.$store.state.last_expanded;
+      let self = this
+      this.axios.get('http://localhost:3333/report-loader/rest/api/company-info/' + expanded_okpo,//'http://localhost/report-loader-app-server/api.php',
+          {
+          }
+      ).then(function (data) {
+        console.log("Got indexes from DB for okpo=", expanded_okpo);
+        console.log(data.data);
+        self.$store.state.ind_data = data.data;
+        console.log(self.$store.state.ind_data);
+        self.$parent.openDialog()
+        //self.$emit('showCompanyDataTableDialog')
+      })
+          .catch(function (error) {
+            console.log('FAILURE IN INDEXES QUERY!! ', error);
+          });
+    },
+    clearIndexes() {
+      //this.indexes = []
+      this.$store.state.ind_data = []
+    },
+    /*upd(){
+      let self = this
+      this.$store.state.temp_ind_data.forEach(function(item) {
+        self.$store.state.ind_data.push(item)
+      });
+      this.clearTempData();
     }*/
+  },
+  created: function () {
+  },
+  mounted: function () {
   }
+  /*watch: {
+    addElement() {
+       console.log(`We have ${this.$store.main_info} fruits now, yay!`)
+    }
+  }*/
+}
 </script>
