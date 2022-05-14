@@ -14,24 +14,16 @@ export default {
   data() {
     return {
       headers: [
-        {text: 'Чистая прибыль', value: 'profit', sortable: false,},
-        {text: 'Выручка', value: 'revenue', sortable: false,},
-        {text: 'Средняя заработная плата', value: 'salary', sortable: false,},
-        {text: 'Средняя численность работников', value: 'people', sortable: false,},
-        {text: 'Кредиторская задолженность', value: 'payable', sortable: false,},
-        {text: 'Дебиторская задолженность', value: 'receivable', sortable: false,},
+        {text: 'Отчетный год', value: 'reporting_year', sortable: true,},
+        {text: 'Чистая прибыль', value: 'profit', sortable: true,},
+        {text: 'Выручка', value: 'revenue', sortable: true,},
+        {text: 'Средняя заработная плата', value: 'salary', sortable: true,},
+        {text: 'Средняя численность работников', value: 'people', sortable: true,},
+        {text: 'Кредиторская задолженность', value: 'payable', sortable: true,},
+        {text: 'Дебиторская задолженность', value: 'receivable', sortable: true,},
       ],
       //okpo: '',
       indexes: [
-        /*{
-          /*ofit: '1',
-          revenue: '12134335',
-          salary: '1',
-          people: '12134335',
-          payable: '"Квадратные штаны"',
-          recievable: '"Квадратные штаны"',
-          },*/
-
       ],
     }
 

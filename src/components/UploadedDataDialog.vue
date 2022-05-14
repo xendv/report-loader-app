@@ -109,7 +109,15 @@
         upd(){
           let self = this
           this.$store.state.temp_data.forEach(function(item) {
-            self.$store.state.main_info_data.push(item)
+            var okpo = item["okpo"];
+            var name = item["name"];
+            var result = self.$store.state.main_info_data.find(obj => {  return obj["okpo"] === okpo;})
+            if (result === undefined) {
+              self.$store.state.main_info_data.push(item)
+            }
+            else if (result["name"] === undefined && name !== undefined) {
+              result["name"] = name//медленно обновляется??
+            }
           });
           this.clearTempData();
         }

@@ -4,7 +4,7 @@
       :items="this.$store.state.main_info_data"
       :key="main_data_table"
 
-      :items-per-page="5"
+      :items-per-page="10"
       item-key="okpo"
       class="elevation-1"
 
