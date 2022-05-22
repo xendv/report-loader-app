@@ -131,16 +131,23 @@ export default {
           }
       ).then(function (data) {
         console.log("Got data from file");
-        console.log("DATA ", data);
-        console.log("DATA.DATA ", data.data);
-        self.$store.state.temp_data = data.data;//JSON.parse(data.data);
+        console.log("infos parse ", JSON.parse(data.data["infos"]));
+        console.log("states", data.data["states"]);
+
+        self.$store.state.temp_data = JSON.parse(data.data["infos"]);//JSON.parse(data.data);
+        console.log("temp_data", self.$store.state.temp_data);
         let temp_headers = [];
         for (let header_name of Object.keys(self.$store.state.temp_data[0])) {
           temp_headers.push({text: header_name, value: header_name, sortable: false,});
         }
+        temp_headers.push({text: "Статус", value: "state", sortable: false,})
         console.log("TEMP HEADERS ", temp_headers);
         self.$store.state.temp_data_headers = temp_headers;
         console.log("TEMP DATA ", self.$store.state.temp_data);
+        let states = JSON.parse(data.data["states"])
+        for (var i = 0; i < states.length; i++) {
+          self.$store.state.temp_data[i]["state"] = states[i]
+        }
         self.$emit('showUploadedDataTableDialog');
       })
           .catch(function (error) {
