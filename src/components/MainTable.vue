@@ -7,7 +7,7 @@
       :items-per-page="10"
       item-key="okpo"
       class="elevation-1"
-
+      sort-by="okpo"
       focusable
       :footer-props="{
       showFirstLastPage: true,
@@ -114,6 +114,7 @@ export default {
     },
     setLastExpanded({item}) {
       this.$store.state.last_expanded = item.okpo;
+      this.$store.state.last_expanded_name = item.name;
       this.$emit('getExpanded');
     },
     showCompanyData(item) {
@@ -121,6 +122,7 @@ export default {
       var pickedItem = Object.assign({}, item)
       console.log("Picked company to show with id " + pickedIndex + " and okpo " + pickedItem["okpo"])
       this.$store.state.last_expanded = pickedItem["okpo"]
+      this.$store.state.last_expanded_name = pickedItem["name"]
       //this.parentFragment.$emit('showCompanyDataTableDialog')
       this.parentFragment.getIndexes()
     },
@@ -128,6 +130,7 @@ export default {
   },
   created: function () {
     let self = this
+    //alert("booo");
     this.axios.get('http://localhost:3333/report-loader/rest/api/main-info',//'http://localhost/report-loader-app-server/api.php',
         //formData,
         {

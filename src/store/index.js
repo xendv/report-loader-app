@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+//import { mapState } from "vuex";
+//import alert from "../components/Alert";
 
 Vue.use(Vuex)
 
@@ -13,6 +15,9 @@ export default new Vuex.Store({
     temp_data: [],
     temp_data_headers: [],
     last_expanded: null,
+    alert: {
+      message: null
+    },
   },
   getters: {
     get_main_info_data(state){
@@ -29,6 +34,9 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    setAlert(message) {
+      this.state.alert['message'] = message
+    },
     addNewCompanyData () {
       /*state.main_info_data.push(company_main_data);
       state.ind_data.push(company_ind_data);
@@ -74,5 +82,17 @@ export default new Vuex.Store({
 
   },
   modules: {
+    /*alertModule: {
+      state: {
+        alert: {
+          message: "aa",
+        },
+      },
+      mutations: {
+        setAlert(message) {
+           this.state.alert[message] = message
+        }
+      }
+    }*/
   }
 })

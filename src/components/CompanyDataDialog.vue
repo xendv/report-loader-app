@@ -7,7 +7,7 @@
         max-width="1200px"
     >
       <v-card>
-        <v-card-title>Данные предприятия</v-card-title>
+        <v-card-title class="justify-center">Данные предприятия {{this.$store.state.last_expanded_name}}, ОКПО {{this.$store.state.last_expanded}}</v-card-title>
         <v-divider></v-divider>
         <v-card-text style="height: 300px;">
           <CompanyDataTable/>

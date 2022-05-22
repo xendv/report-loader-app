@@ -15,14 +15,13 @@ export default {
     return {
       headers: [
         {text: 'Отчетный год', value: 'reporting_year', sortable: true,},
-        {text: 'Чистая прибыль', value: 'profit', sortable: true,},
+        {text: 'Чистая прибыль', value: 'profit', sortable: true, default: '-'},
         {text: 'Выручка', value: 'revenue', sortable: true,},
         {text: 'Средняя заработная плата', value: 'salary', sortable: true,},
         {text: 'Средняя численность работников', value: 'people', sortable: true,},
         {text: 'Кредиторская задолженность', value: 'payable', sortable: true,},
         {text: 'Дебиторская задолженность', value: 'receivable', sortable: true,},
       ],
-      //okpo: '',
       indexes: [
       ],
     }
@@ -41,32 +40,18 @@ export default {
         self.$store.state.ind_data = data.data;
         console.log(self.$store.state.ind_data);
         self.$parent.openDialog()
-        //self.$emit('showCompanyDataTableDialog')
       })
           .catch(function (error) {
             console.log('FAILURE IN INDEXES QUERY!! ', error);
           });
     },
     clearIndexes() {
-      //this.indexes = []
       this.$store.state.ind_data = []
     },
-    /*upd(){
-      let self = this
-      this.$store.state.temp_ind_data.forEach(function(item) {
-        self.$store.state.ind_data.push(item)
-      });
-      this.clearTempData();
-    }*/
   },
   created: function () {
   },
   mounted: function () {
   }
-  /*watch: {
-    addElement() {
-       console.log(`We have ${this.$store.main_info} fruits now, yay!`)
-    }
-  }*/
 }
 </script>
